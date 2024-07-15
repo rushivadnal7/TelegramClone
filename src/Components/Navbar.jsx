@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Wrapper } from "../Wrappers/Navbar";
+import { OpenMenu, Wrapper } from "../Wrappers/Navbar";
 import NavigationLinks from "./NavigationLinks";
 
 const Navbar = () => {
@@ -41,8 +41,13 @@ const Navbar = () => {
         };
     }, []);
 
+    const CloseMenu = () => {
+      setOpenMenu(false);
+  };
+
     return (
         <Wrapper>
+          {openMenu && ( <OpenMenu onClick={CloseMenu}/>)}
             <div className="hamburger-menu-logo">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
