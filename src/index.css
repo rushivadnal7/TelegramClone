@@ -19,5 +19,10 @@
 
   --primary : #20374f;
   --secondary : #405368;
+  --gray : #252323;
+  --blue: #3390ec;
 }
 
+body{
+  overflow: hidden;
+}

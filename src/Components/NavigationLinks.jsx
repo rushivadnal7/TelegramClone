@@ -12,13 +12,17 @@ export const NavLink = styled.div`
     align-items: center;
     padding: 0 1rem;
     gap: 1rem;
-    /* border-bottom: 1px solid black; */
+
+    @media (min-width: 900px) {
+      font-size: 1.1rem;
+    }
+
 `
 const NavigationLinks = ({text , icon , navigateTo}) => {
     const navigate = useNavigate()
 
   return (
-    <NavLink onClick={() => navigate(`/${navigateTo}`)}>
+    <NavLink onClick={() => navigate(`/`)}>
         {icon}
         <span>{text}</span>
     </NavLink>
