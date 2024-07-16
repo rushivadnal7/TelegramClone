@@ -13,4 +13,6 @@ Currently, two official plugins are available:
 <!-- I have used createBrowserRouter, RouterProvider from react-router-dom to navigate between the pages  -->
 <!-- I have used hooks like useContext , useEffect , useState -->
 <!-- Because I checked the assignment  on 14th july , with the submission date of 15th july . I am one day late for submission appologies for that but as per the guidelines submitted the project within 48hrs-->
+<!-- I have created custom Hooks (useWindowSize) -->
+<!-- The project is fully responsive -->
 
