@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
+import { ChatContext } from "../Context/ChatContext";
+import useWindowSize from "../CustomHooks/useWindowSize";
+import { useNavigate } from "react-router-dom";
 
 export const Message = styled.div`
   width: 100%;
@@ -13,8 +16,8 @@ export const Message = styled.div`
   margin: 5px 0px;
 
   &:hover {
-    background-color: rgb(0,0,0,0.2); /* Example hover effect */
-    cursor: pointer; 
+    background-color: rgb(0, 0, 0, 0.2); /* Example hover effect */
+    cursor: pointer;
   }
 
   .profile {
@@ -22,9 +25,14 @@ export const Message = styled.div`
   }
 
   .profile-photo {
-    width: 4rem;
-    height: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--blue);
     background-color: aliceblue;
   }
 
@@ -42,10 +50,12 @@ export const Message = styled.div`
     justify-content: space-between;
   }
 
-  .Name{
+  .Name {
     font-size: 1.2rem;
     font-weight: 600;
+  }
 
+  .message-body {
   }
 
   .message-count {
@@ -56,20 +66,72 @@ export const Message = styled.div`
 `;
 
 const UserMessage = ({ item }) => {
-    console.log(item)
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+
+  const { setSelectedChat } = useContext(ChatContext);
+  const [userChats, setUserChats] = useState([]);
+  const navigate = useNavigate();
+  const { width } = useWindowSize();
+
   const Name = item.creator.name;
+  let userFirstMessage;
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const response = await fetch(
+          `https://devapi.beyondchats.com/api/get_chat_messages?chat_id=${item.id}`,
+          requestOptions
+        );
+        const result = await response.json();
+        setUserChats(result.data);
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+      }
+    };
+
+    fetchMessages();
+  }, []);
+
+  userChats.slice(0, 1).map((msg) => {
+    userFirstMessage = msg.message;
+  });
+
+  const truncatedMessage = userFirstMessage?.substring(0, 30) || "";
+
+  const viewChatHandler = () => {
+    setSelectedChat({
+      id: item.id,
+      name: Name ? Name : "unknown",
+      message: userChats.map((msg) => msg.message),
+    });
+
+    if (width <= 900) {
+      navigate("/chat");
+    }else{
+      navigate("/");
+    }
+  };
+
   return (
     <>
-      <Message>
+      <Message onClick={viewChatHandler}>
         <div className="profile">
-          <div className="profile-photo"></div>
+          <div className="profile-photo">{Name ? Name?.slice(0, 1) : "U"}</div>
         </div>
         <div className="message-content">
           <div className="message-header">
             <div className="Name">{Name ? Name : "Unknown"}</div>
           </div>
           <div className="message-footer">
-            <div className="message-body">message</div>
+            <div className="message-body">
+              {truncatedMessage?.includes(" ")
+                ? `${truncatedMessage}...`
+                : `${truncatedMessage}`}
+            </div>
             <div className="message-count">{item.msg_count}</div>
           </div>
         </div>

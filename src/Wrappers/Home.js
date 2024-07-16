@@ -25,6 +25,7 @@ export const Wrapper = styled.section`
             background-image: url('../assets/chat-theme-light.jpeg');
             background-size: contain;
             background-repeat: no-repeat;
+            position: relative;
         }
     }
     

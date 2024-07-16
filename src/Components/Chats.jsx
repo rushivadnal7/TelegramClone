@@ -8,34 +8,31 @@ const Chats = () => {
     redirect: "follow",
   };
 
-  const [data, setData] = useState([]);
+  const [Chatdata, setChatData] = useState([]);
 
   useEffect(() => {
-    fetch(
-      "https://devapi.beyondchats.com/api/get_all_chats?page=0",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        //   console.log(result.data.data);
-        setData(result.data.data);
-      })
-      .catch((error) => console.error(error));
-  }, []);
+    const fetchChats = async () => {
+      try {
+        const response = await fetch(
+          "https://devapi.beyondchats.com/api/get_all_chats?page=0",
+          requestOptions
+        );
+        const result = await response.json();
+        setChatData(result.data.data);
+        
+      } catch (error) {
+        console.error("Error fetching chats:", error);
+      }
+    };
 
-  fetch(
-    "https://devapi.beyondchats.com/api/get_chat_messages?chat_id=3888",
-    requestOptions
-  )
-    .then((response) => response.json())
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error));
+    fetchChats();
+  }, []);
 
   return (
     <>
       <Wrapper>
-        {data.map((item, id) => {
-          return <UserMessage key={id} item={item} />;
+        {Chatdata.map((item, id) => {
+          return <UserMessage key={id} item={item}  />;
         })}
       </Wrapper>
     </>

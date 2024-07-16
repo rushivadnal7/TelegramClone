@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useState , useContext } from "react";
 import { Wrapper } from "../Wrappers/Home";
 import Navbar from "../Components/Navbar";
 import Chats from "../Components/Chats";
 
-import Dark_theme_chat from '../assets/chat-theme-dark.jpeg'
+
+import ChatView from "../Components/ChatView";
+import { ChatContext } from "../Context/ChatContext";
 
 const Home = () => {
+
+  const { selectedChat } = useContext(ChatContext);
+
   return (
     <Wrapper>
       <section className="left-section">
         <Navbar />
-        <Chats/>
+        <Chats />
       </section>
-      <section style={{ backgroundImage: `url(${Dark_theme_chat})` , backgroundRepeat: 'repeat-x' , backgroundSize:'contain'}} className="right-section">
+      <section
+        
+        className="right-section"
+      >
+        {selectedChat && <ChatView/>}
       </section>
     </Wrapper>
   );

@@ -8,10 +8,10 @@ export const Wrapper = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed; /* Changed from sticky */
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000; /* Adjust z-index as needed */
+    z-index: 1000; 
 
     @media (min-width: 900px) {
         
@@ -94,7 +94,8 @@ export const Wrapper = styled.nav`
         &{
          background-color: var(--gray);
         width: 35%;
-        padding: 0px px;
+        padding: 0px 15px;
+        border-bottom: 1px solid black;
         }
 
         .logo{
