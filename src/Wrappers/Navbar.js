@@ -79,10 +79,10 @@ export const Wrapper = styled.nav`
     }
 
     .theme-icon {
-        /* position: absolute; */
-        /* top: 1px;
-        right: 20px; */
-        background-color: aliceblue;
+        position: absolute;
+        top: 1px;
+        right: 20px;
+
         border-radius: 50%;
         width: 50px;
         height: 50px;
@@ -98,7 +98,7 @@ export const Wrapper = styled.nav`
     }
 
     .sun{
-        color: var(--blue);
+        color: white;
         filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
     }
 
