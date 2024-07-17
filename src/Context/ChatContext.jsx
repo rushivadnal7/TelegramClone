@@ -1,13 +1,20 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState } from "react";
 
-export const ChatContext = createContext()
+export const ChatContext = createContext();
 
-export const Chatprovider = ({children}) => {
-    const [selectedChat , setSelectedChat] = useState(null)
+export const ChatProvider = ({ children }) => {
+  const [selectedChat, setSelectedChat] = useState(null);
+  const [theme, setTheme] = useState("dark"); 
 
-    return (
-        <ChatContext.Provider value={{selectedChat , setSelectedChat}}>
-            {children}
-        </ChatContext.Provider>
-    )
-}
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
+  return (
+    <ChatContext.Provider
+      value={{ theme, setTheme, selectedChat, setSelectedChat, toggleTheme }}
+    >
+      {children}
+    </ChatContext.Provider>
+  );
+};

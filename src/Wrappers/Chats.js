@@ -5,6 +5,8 @@ export const Wrapper = styled.div`
     height: calc(100vh - 4rem);
     display: flex;
     flex-direction: column;
+    background-color: ${({ theme }) => (theme === 'light' ? `white` : 'var(--gray)')};
+    /* color : ${({ theme }) => (theme === 'light' ? `var(--gray)` : 'white')}; */
     overflow-y: auto;
     padding: 10px;
     gap: 0.5px;

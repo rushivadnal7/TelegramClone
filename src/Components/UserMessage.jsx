@@ -1,13 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
-import { ChatContext } from "../Context/ChatContext";
 import useWindowSize from "../CustomHooks/useWindowSize";
 import { useNavigate } from "react-router-dom";
+import { ChatContext } from "../Context/ChatContext";
 
 export const Message = styled.div`
   width: 100%;
   height: 7rem;
-  background-color: var(--gray);
+  background-color: ${({ theme }) =>
+    theme === "light" ? `white` : "var(--gray)"};
+  color: ${({ theme }) => (theme === "light" ? `var(--gray)` : "white")};
   display: flex;
   padding: 0px 1rem;
   align-items: center;
@@ -16,7 +18,7 @@ export const Message = styled.div`
   margin: 5px 0px;
 
   &:hover {
-    background-color: rgb(0, 0, 0, 0.2); /* Example hover effect */
+    background-color: ${({ theme }) => (theme === "light" ? `rgb(0, 0, 0, 0.1)` : "rgb(0, 0, 0, 0.2)")} ;
     cursor: pointer;
   }
 
@@ -67,6 +69,7 @@ export const Message = styled.div`
 `;
 
 const UserMessage = ({ item }) => {
+  const { theme } = useContext(ChatContext);
   const requestOptions = {
     method: "GET",
     redirect: "follow",
@@ -112,14 +115,14 @@ const UserMessage = ({ item }) => {
 
     if (width <= 900) {
       navigate("/chat");
-    }else{
+    } else {
       navigate("/");
     }
   };
 
   return (
     <>
-      <Message onClick={viewChatHandler}>
+      <Message theme={theme} onClick={viewChatHandler}>
         <div className="profile">
           <div className="profile-photo">{Name ? Name?.slice(0, 1) : "U"}</div>
         </div>

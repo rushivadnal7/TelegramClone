@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState  , useContext} from "react";
 import UserMessage from "./UserMessage";
 import { Wrapper } from "../Wrappers/Chats";
+import { ChatContext } from "../Context/ChatContext";
 
 const Chats = () => {
+  const { theme} = useContext(ChatContext);
   const requestOptions = {
     method: "GET",
     redirect: "follow",
@@ -19,7 +21,6 @@ const Chats = () => {
         );
         const result = await response.json();
         setChatData(result.data.data);
-        
       } catch (error) {
         console.error("Error fetching chats:", error);
       }
@@ -30,9 +31,9 @@ const Chats = () => {
 
   return (
     <>
-      <Wrapper>
+      <Wrapper theme={theme}>
         {Chatdata.map((item, id) => {
-          return <UserMessage key={id} item={item}  />;
+          return <UserMessage key={id} item={item} />;
         })}
       </Wrapper>
     </>
