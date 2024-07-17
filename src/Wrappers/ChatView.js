@@ -123,6 +123,6 @@ export const TypeMessage = styled.div`
 }
 @media (min-width: 900px) {
     width: 25rem;
-    left: 50%;
+    left: 70%;
   }
 `;

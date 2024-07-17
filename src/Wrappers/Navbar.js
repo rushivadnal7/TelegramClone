@@ -79,9 +79,48 @@ export const Wrapper = styled.nav`
     }
 
     .theme-icon {
+        /* position: absolute; */
+        /* top: 1px;
+        right: 20px; */
+        background-color: aliceblue;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .theme-icon input{
         position: absolute;
-        top: 20px;
-        right: 20px;
+        opacity: 0;
+    }
+
+    .sun{
+        color: var(--blue);
+        filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+    }
+
+
+    .toggle{
+        position: absolute;
+        display: block;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        box-shadow: 
+        inset 0 8px 60px rgba(0, 0, 0, 0.1), 
+        inset 0 8px 8px rgba(0, 0, 0, 0.1), 
+        inset 0 -4px 4px rgba(0, 0, 0, 0.1), 
+        ;
+        z-index: -1;
+        background-color: var(--gray);
+    }
+
+
+    input:checked~.toggle{
+        background-color: var(--blue);
     }
 
     .icon-size{

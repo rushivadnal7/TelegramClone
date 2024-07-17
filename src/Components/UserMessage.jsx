@@ -59,6 +59,7 @@ export const Message = styled.div`
   }
 
   .message-count {
+    height: max-content;
     background-color: var(--blue);
     padding: 0px 10px;
     border-radius: 10px;
